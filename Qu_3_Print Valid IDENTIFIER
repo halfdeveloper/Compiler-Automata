@@ -1,0 +1,68 @@
+#include<stdio.h>
+#include<string.h>
+#include <ctype.h>
+// Function to check substring is number //
+int isNumber(char s[])
+{
+    for (int i = 0; s[i]!= '\0'; i++)
+    {
+        if(isdigit(s[i]) == 0)
+            return 0;
+    }
+    return -1;
+}
+// Function to check substring is identifier or not //
+int isValid(char str[], int n)
+{
+// If first character is invalid //
+    if(!((str[0] >= 'a' && str[0] <= 'z')
+            || (str[0] >= 'A' && str[0] <= 'Z')
+            || str[0] == '_')) return 0;
+// Traverse the string for the rest of the characters //
+    for(int i = 1; i < n; i++)
+    {
+        if (!((str[i] >= 'a' && str[i] <= 'z')
+                || (str[i] >= 'A' && str[i] <= 'Z')
+                || (str[i] >= '0' && str[i] <= '9')
+                || str[i] == '_')) return 0;
+    }
+// String is a valid identifier //
+    return 1;
+}
+int main()
+{
+    char str[500];
+    printf("Enter string: ");
+//fgets(str, sizeof(str), stdin);
+    scanf("%[^\n]%*c", str);
+    char *token = strtok(str, " ");
+    int cnt=0;
+    printf("--Substring\tIdentified as--\n");
+    while(token != NULL)
+    {
+        int n = strlen(token);
+        if(isNumber(token)==-1)
+            printf("%s \t\tnumber\n", token);
+        else
+        {
+            if(isValid(token, n)==1)
+                printf("%s \t\tidentifier\n", token);
+            else
+                printf("%s \t\tother\n", token);
+        }
+        token = strtok(NULL, " ");
+        cnt++;
+    }
+    printf("Total Substring = %d", cnt);
+    return 0;
+}
+/*
+Enter string: Sum is d!23
+--Substring     Identified as--
+Sum             identifier
+is              identifier
+d!23            other
+Total Substring = 3
+Process returned 0 (0x0)   execution time : 7.898 s
+Press any key to continue.
+*/
