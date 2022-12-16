@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    FILE * file;
+    FILE * file1;
+    char path[100];
+    char ch,c;
+    int characters, words, lines;
+    file = fopen("inputfile.txt", "r");
+    if (file == NULL)
+    {
+        printf("\nUnable to open file.\n");
+        printf("Please check if file exists and you have read privilege.\n");
+
+        exit(EXIT_FAILURE);
+    }
+     c = fgetc(file);
+    while (c != EOF)
+    {
+        printf ("%c", c);
+        c = fgetc(file);
+    }
+
+     printf("\nOutput -> \n");
+     file1 = fopen("inputfile.txt", "r");
+    characters = words = lines = 0;
+    while ((ch = fgetc(file1)) != EOF)
+    {
+        characters++;
+
+        if (ch == '\n' || ch == '\0')
+            lines++;
+
+        if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\0')
+            words++;
+    }
+    if (characters > 0)
+    {
+        words++;
+        lines++;
+    }
+    printf("\n");
+    printf("Total characters = %d\n", characters);
+    printf("Total words      = %d\n", words);
+    printf("Total lines      = %d\n", lines);
+    fclose(file);
+
+    return 0;
+}
+/*
+He is a good boy.
+And I am Boy.
+Output ->
+
+Total characters = 32
+Total words      = 10
+Total lines      = 2
+
+Process returned 0 (0x0)   execution time : 0.094 s
+Press any key to continue.
+*/
