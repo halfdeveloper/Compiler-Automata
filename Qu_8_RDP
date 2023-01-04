@@ -1,0 +1,45 @@
+// s->AB
+// A->aB|b
+// B->Sb|b
+#include<stdio.h>
+#include<string.h>
+void S();
+void A();
+void B();
+char input[100];
+int i,error;
+int main(){
+    printf("Enter the string\n");
+    gets(input);
+    S();
+    if(i==strlen(input)){
+        printf("Acc");
+    }
+    else{
+        printf("Not acc");
+    }
+
+}
+void S(){
+    A();
+    B();
+}
+void A(){
+    if(input[i]=='b'){
+        i++;
+    }
+    else if(input[i]=='a'){
+        i++;
+        B();
+    }   
+}
+void B(){
+    if(input[i]=='b'){
+        i++;
+    }else{
+        S();
+        if(input[i]=='b'){
+            i++;
+        }
+}
+}
